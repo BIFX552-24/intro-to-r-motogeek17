@@ -26,7 +26,7 @@ c(1, 2, 'f')
 
 <!-- Challenge 1 answer begin -->
 
-Your answer goes here
+The first command results in a integer vector. The second and third commands result in a character vector. The third vector contains a character value making the vector a character vector (integer \< character).
 
 <!-- Challenge 1 answer end -->
 
@@ -36,7 +36,9 @@ Look at the help for the `paste` function. You will need to use it later. What's
 
 <!-- Challenge 2 answer begin -->
 
-Your answer goes here
+sep = controls how the results are pasted together.
+
+collapse = controls how the results are pasted together. If collapse is NULL, you might get a vector character of strings, but when specifying a value for collapse, you will get a single character string.
 
 <!-- Challenge 2 answer end -->
 
@@ -52,6 +54,10 @@ Use `??"read table"` to look up functions related to reading in tabular data.
 
 <!-- Challenge 3 answer begin -->
 
-Your answer goes here
+`read.table` with `sep = '\t'`
+
+`read.delim` the default is already '\\t'. The default for dec = "." for the US.
+
+`read.delim2` also has default '\\t' and the dec = "," for Europe
 
 <!-- Challenge 3 answer end -->
