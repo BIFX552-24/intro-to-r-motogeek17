@@ -30,7 +30,9 @@ Make a new column in the `gapminder` data frame that contains population in unit
 <!-- Challenge 1 answer begin -->
 
 ```{r}
-# your code goes here
+gapminder$pop_mil <- gapminder$pop / 1e6
+head(gapminder)
+tail(gapminder)
 ```
 
 <!-- Challenge 1 answer end -->
@@ -42,7 +44,10 @@ On a single graph, plot population, in millions, against year, for all countries
 <!-- Challenge 2a answer begin -->
 
 ```{r}
-# your code goes here
+ggplot(gapminder, aes(x = year, y = pop_mil)) +
+  geom_point() +
+  labs(x = 'Year',
+       y = 'Population (millions)')
 ```
 
 <!-- Challenge 2a answer end -->
@@ -54,7 +59,20 @@ Repeat the exercise, graphing only for China, India, and Indonesia. Again, do no
 <!-- Challenge 2b answer begin -->
 
 ```{r}
-# your code goes here
+country_top <- c('China', 'India', 'Indonesia')
+ggplot(gapminder[gapminder$country %in% country_top,],
+       aes(x = year, y = pop_mil)) +
+  geom_point(color = 'orange') +
+  labs(x = 'Year',
+       y = 'Population (millions)',
+       title = 'Top Most Populated Countries')
+
+# gapminder[gapminder$country %in% c('China', 'India', 'Indonesia'),] %>%
+#   ggplot(aes(year, pop_mil)) +
+#   geom_point(color = 'green') +
+#   labs(x = 'Year',
+#        y = 'Population (millions)',
+#        title = 'Top Most Populated Countries')
 ```
 
 <!-- Challenge 2b answer end -->
@@ -77,9 +95,10 @@ Write down what you think will happen when you run:
 
 Did you get the output you expected? If not and the video didn't clear things up, let me know and we can discuss.
 
-<!-- Challenge 3 answer begin -->
-
-Your answer goes here.
+-   `m ^ -1` divides 1 by all the values in m
+-   `m * c(1, 0, -1)` will recycle the values in the vector on the right, resulting in row 1 being multiplied by 1, row two multiplied by 0, and row 3 multiplied by -1.
+-   `m > c(0, 20)` will recycle the values in the vector on the right. The values in m will be compared one column at a time. Since it is of length 2, this will not result in the same comparison being made across each row.
+-   `m * c(1, 0, -1, 2)` will recycle the values in the vector on the right. Row 1 will go through the first three numbers. Row 2 will start at 2 and cycle back around, continuing down the column to the next column.
 
 <!-- Challenge 3 answer end -->
 
@@ -96,7 +115,7 @@ This would be tedious to type out, and impossible for high values of $n$. Use ve
 <!-- Challenge 4a answer begin -->
 
 ```{r}
-# your code goes here
+sum(1 / (1:100)^2)
 ```
 
 <!-- Challenge 4a answer end -->
@@ -108,7 +127,10 @@ What is the sum when $n=10,000$?
 <!-- Challenge 4b answer begin -->
 
 ```{r}
-# your code goes here
+sum(1 / (1:1e4)^2)
+
+# n <- 1e4
+# sum(1 / (1:n)^2)
 ```
 
 <!-- Challenge 4b answer end -->

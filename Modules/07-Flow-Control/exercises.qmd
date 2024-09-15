@@ -1,7 +1,6 @@
 ---
 title: "Control Flow"
 format: html
-editor: visual
 ---
 
 The exercises in this document follow along closely with [Lesson 7](https://swcarpentry.github.io/r-novice-gapminder/07-control-flow.html) of [R for Reproducible Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder/), provided by the [Software Carpentry](https://software-carpentry.org/) community under the creative commons license, [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/). For more information see [The Carpentries](https://carpentries.org/).
@@ -28,7 +27,10 @@ Use an `if()` statement to print a suitable message reporting whether there are 
 <!-- Challenge 1a answer begin -->
 
 ```{r}
-# you code goes here
+if(any(gapminder$year == 2002))
+{
+  print('There are records from 2002 in the gapminder dataset')
+}
 ```
 
 <!-- Challenge 1a answer end -->
@@ -40,7 +42,10 @@ Now do the same for 2012.
 <!-- Challenge 1b answer begin -->
 
 ```{r}
-# your code goes here
+if(any(gapminder$year == 2012))
+{
+  print('There are records from 2012 in the gapminder dataset')
+}
 ```
 
 <!-- Challenge 1b answer end -->
@@ -63,7 +68,7 @@ for (i in 1:5) {
   for (j in 1:5) {
     temp_j_value <- j_vector[j]
     temp_output <- paste(i, temp_j_value)
-    output_matrix[i, j] <- temp_output
+    output_matrix[i, j] <- temp_output # by row-i stays the same for the first 5
   }
 }
 output_vector2 <- as.vector(output_matrix)
@@ -73,7 +78,17 @@ Compare the objects `output_vector` and `output_vector2`. Are they the same? If 
 
 <!-- Challenge 2 answer begin -->
 
-Code and/or text answer goes here.
+```{r}
+for (i in 1:5) {
+  for (j in 1:5) {
+    temp_j_value <- j_vector[j]
+    temp_output <- paste(i, temp_j_value)
+    output_matrix[j, i] <- temp_output # by column-j stays the same
+    # instead of swapping indices, run t(output_matrix)
+  }
+}
+output_vector2 <- as.vector(output_matrix)
+```
 
 <!-- Challenge 2 answer end -->
 
@@ -84,7 +99,20 @@ Write a script that loops through the `gapminder` data by continent and prints o
 <!-- Challenge 3 answer begin -->
 
 ```{r}
-# your code goes here
+for (i in levels(gapminder$continent)) {
+ mean_lifeExp <- gapminder[gapminder$continent == i, 'lifeExp'] %>%
+   unlist() %>% # takes a df/tibble and remove list structure, turning it into vector
+    mean()
+ 
+ if (mean_lifeExp >= 50) {
+   paste(i, 'has a mean life expectancy greater than 50 years') %>%
+     print()
+ }
+   else{
+      paste(i, 'has a mean life expectancy less than 50 years') %>%
+     print()
+   }
+}
 ```
 
 <!-- Challenge 3 answer end -->
@@ -96,7 +124,23 @@ Modify the script from Challenge 3 to loop over each country. This time print ou
 <!-- Challenge 4 answer begin -->
 
 ```{r}
-# your code goes here
+for (i in levels(gapminder$country)) {
+ mean_lifeExp <- gapminder[gapminder$country == i, 'lifeExp'] %>%
+   unlist() %>% # takes a df/tibble and remove list structure, turning it into vector
+    mean()
+ 
+ if (mean_lifeExp < 50) 
+   {
+   paste(i, 'has a mean life expectancy less than 50 years') %>%
+     print()
+ }else if(mean_lifeExp < 70){
+   paste(i, 'has a mean life expectancy between 50 and 70 years.') %>%
+     print()
+ }else{
+      paste(i, 'has a mean life expectancy greater than 70 years') %>%
+     print()
+ }
+}
 ```
 
 <!-- Challenge 4 answer end -->
