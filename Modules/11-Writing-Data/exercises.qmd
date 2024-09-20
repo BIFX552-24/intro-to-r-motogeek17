@@ -27,7 +27,7 @@ library(ggplot2)
 library(cowplot)
 theme_set(theme_cowplot())
 
-# get path to this directory
+# get path to this directory-portable to any OS directory system
 module11 <- system('git rev-parse --show-toplevel', intern = TRUE) %>%
   file.path('Modules', '11-Writing-Data')
 ```
@@ -44,6 +44,12 @@ pdf(file.path(module11, "Life_Exp_vs_time.pdf"), width=12, height=4)
 ggplot(gapminder, aes(year, lifeExp, color=country)) +
   geom_line() +
   theme(legend.position = "none")
+
+ggplot(gapminder, aes(year, lifeExp, color=country)) +
+  geom_line() +
+  facet_grid(~ continent) +
+  theme(legend.position = "none")
+
 # You then have to make sure to turn off the pdf device!
 dev.off()
 ```
@@ -59,7 +65,11 @@ Use this script to write out the new subset to a file in the `cleaned-data/` dir
 <!-- Challenge 2 answer begin -->
 
 ```{r}
-# insert code here
+source('data-cleaning.R')
+
+write.table(gapminder_cleaned, 
+            file = file.path(module11, 'cleaned-data', 'gapminder-cleaned.csv'),
+            sep = ',', row.names = FALSE, quote = FALSE)
 ```
 
 <!-- Challenge 2 answer end -->
