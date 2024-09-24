@@ -36,8 +36,10 @@ Using the `full_join` function, join tables `jdf4` and `jdf5`. What has happened
 <!-- Challenge 1 answer begin -->
 
 ```{r}
-# Insert code here
+full_join(jdf4, jdf5)
 ```
+
+`P26039` was only in `jdf4` and `P02468` was only in `jdf5`. A `full_join` joins and keeps everything in both tables, so items not found in a table get NA'd.
 
 <!-- Challenge 1 answer end -->
 
@@ -48,7 +50,7 @@ Join tables `jdf4` and `jdf5`, keeping only observations in `jdf4`.
 <!-- Challenge 2 answer begin -->
 
 ```{r}
-# Insert code here
+left_join(jdf4, jdf5)
 ```
 
 <!-- Challenge 2 answer end -->
@@ -60,7 +62,7 @@ Join tables `jdf4` and `jdf5`, keeping only observations in `jdf5`.
 <!-- Challenge 3 answer begin -->
 
 ```{r}
-# Insert code here
+right_join(jdf4, jdf5)
 ```
 
 <!-- Challenge 3 answer end -->
@@ -72,7 +74,7 @@ Join tables `jdf4` and `jdf5`, keeping observations observed in both tables.
 <!-- Challenge 4 answer begin -->
 
 ```{r}
-# Insert code here
+inner_join(jdf4, jdf5)
 ```
 
 <!-- Challenge 4 answer end -->
@@ -83,12 +85,13 @@ Given the inner join,
 
 ```{r}
 inner_join(jdf6, jdf7)
+# inner_join(jdf6, jdf7, by = join_by(isoform == isoform_num, uniprot == uniprot))
 ```
 
 interpret the result, where both tables have duplicated keys.
 
 <!-- Challenge 5 answer begin -->
 
-*insert answer here*
+The `inner_join` resulted in keeping two `uniprot` values (`Q99PL5`) from `jdf6` and two from `jdf7`. This was the `Rrbp1` gene for the Endoplasmic reticulum and the Golgi apparatus. There were two different `isoform_num`'s in `jdf7` with different sizes in `measure` (102 and 3), while `jdf6` had the same isoform in`isoform`, giving 4 rows of all combinations. Should use `inner_join(jdf6, jdf7, by = join_by(isoform == isoform_num, uniprot == uniprot))` to get the correct join.
 
 <!-- Challenge 5 answer end -->
